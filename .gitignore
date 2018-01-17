@@ -5,3 +5,4 @@ tournament
 forum
 catalog
 *.db
+.vscode
