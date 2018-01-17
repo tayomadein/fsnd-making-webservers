@@ -29,17 +29,17 @@ def restaurantMenu(restaurant_id):
     return output
 
     #Task 1: Create route for newMenuItem function here
-    @app.route('/new')
+    @app.route('/restaurant/<int:restaurant_id>/new/')
     def newMenuItem(restaurant_id):
         return "Page to create a new menu item."
 
     #Task 2: Create route for editMenuItem function here
-    @app.route('/edit')
+    @app.route('/restaurant/<int:restaurant_id>/<int:menu_id>/edit/')
     def editMenuItem(restaurant_id, menu_id):
         return "Page to edit a menu item."
 
     #Task 3: Create route for deleteMenuItem function here
-    @app.route('/delete')
+    @app.route('/restaurant/<int:restaurant_id>/<int:menu_id>/delete/')
     def deleteMenuItem(restaurant_id, menu_id):
         return "Page to delete a menu item."
 
