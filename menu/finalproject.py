@@ -103,10 +103,23 @@ def deleteMenuItem(restaurant_id, menu_id):
 
 #API Endpoints
 @app.route('/restaurants/JSON/')
-def restaurantMenuJSON():
+def restaurantJSON():
     ''' API Endpoint for all restaurants (GET Request) '''
     restaurants = session.query(Restaurant).all()
     return jsonify(Restaurants=[restaurant.serialize for restaurant in restaurants])
+
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON/')
+def restaurantMenuJSON(restaurant_id):
+    ''' API Endpoint for all menus items filtered by restaurant_id (GET Request) '''
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id)
+    return jsonify(MenuItems=[i.serialize for i in items])
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON/')
+def menuItemJSON(restaurant_id, menu_id):
+    ''' API Endpoint for a single menu item'''
+    menuItem = session.query(MenuItem).filter_by(id=menu_id).one()
+    return jsonify(MenuItem=menuItem.serialize)
 
 if __name__ == '__main__':
     app.debug = True
