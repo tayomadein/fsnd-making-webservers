@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 ## import for CRUD operations
 from database_setup import Restaurant, Base, MenuItem
 from sqlalchemy import create_engine
@@ -16,12 +16,19 @@ session = DBSession()
 @app.route('/restaurants')
 ## shows a list of all restaurants
 def showRestaurants():
+    restaurants = session.query(Restaurant).all()
     return render_template('restaurants.html', restaurants=restaurants)
 
-@app.route('/restaurant/new')
+@app.route('/restaurant/new', methods = ['GET', 'POST'])
 ## Create a new restaurant
 def newRestaurant():
-    return render_template('newrestaurant.html')
+    if request.method == 'POST':
+        newRestaurant = Restaurant(name=request.form['name'])
+        session.add(newRestaurant)
+        session.commit()
+        return redirect(url_for('showRestaurants'))
+    else:
+        return render_template('newrestaurant.html')
 
 @app.route('/restaurant/edit')
 ## Edit a restaurant's info
