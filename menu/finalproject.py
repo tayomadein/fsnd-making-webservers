@@ -58,12 +58,20 @@ def deleteRestaurant(restaurant_id):
 @app.route('/restaurant/<int:restaurant_id>/menu')
 ## Show menu for one restaurant
 def showMenu(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id).all()
     return render_template('menu.html', restaurant=restaurant, items=items)
 
 @app.route('/restaurant/<int:restaurant_id>/menu/new')
 ## Add a new menu item to a restaurant's menu
 def newMenuItem(restaurant_id):
-    return render_template('newmenuitem.html', restaurant_id=restaurant_id)
+    if request.method == 'POST':
+        newItem = MenuItem(name=request.form['name'], description=request.form['desc'], price=request.form['price'], restaurant_id=restaurant_id)
+        session.add(newItem)
+        session.commit()
+        return redirect(url_for('showMenu', restaurant_id=restaurant_id))
+    else:
+        return render_template('newmenuitem.html', restaurant_id=restaurant_id)
 
 @app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit')
 ## Edit a menu item
