@@ -62,11 +62,11 @@ def showMenu(restaurant_id):
     items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id).all()
     return render_template('menu.html', restaurant=restaurant, items=items)
 
-@app.route('/restaurant/<int:restaurant_id>/menu/new')
+@app.route('/restaurant/<int:restaurant_id>/menu/new', methods = ['GET', 'POST'])
 ## Add a new menu item to a restaurant's menu
 def newMenuItem(restaurant_id):
     if request.method == 'POST':
-        newItem = MenuItem(name=request.form['name'], description=request.form['desc'], price=request.form['price'], restaurant_id=restaurant_id)
+        newItem = MenuItem(name=request.form['name'], description=request.form['desc'], price=request.form['price'], course=request.form['course'], restaurant_id=restaurant_id)
         session.add(newItem)
         session.commit()
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
