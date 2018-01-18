@@ -19,6 +19,14 @@ class Restaurant(Base):
     name = Column(String(80), nullable=False)
     id = Column(Integer, primary_key=True)
 
+    @property
+    def serialize(self):
+        ''' Serialize function to send JSON objects in a serializable format'''
+        return {
+            'name': self.name,
+            'id': self.id,
+        }
+
 
 class MenuItem(Base):
     """Create MenuItem Table"""
@@ -31,11 +39,11 @@ class MenuItem(Base):
     price = Column(String(8))
     restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
     restaurant = relationship(Restaurant)
-    
+
     ## Add a serialize function to send JSON objects in a serializable format
     @property
-    def serialize(self) :
-
+    def serialize(self):
+        ''' Serialize function to send JSON objects in a serializable format'''
         return {
             'name': self.name,
             'description': self.description,

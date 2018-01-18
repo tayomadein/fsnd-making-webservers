@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 ## import for CRUD operations
 from database_setup import Restaurant, Base, MenuItem
 from sqlalchemy import create_engine
@@ -100,6 +100,13 @@ def deleteMenuItem(restaurant_id, menu_id):
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
         return render_template('deletemenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id, i=deleteItem)
+
+#API Endpoints
+@app.route('/restaurants/JSON/')
+def restaurantMenuJSON():
+    ''' API Endpoint for all restaurants (GET Request) '''
+    restaurants = session.query(Restaurant).all()
+    return jsonify(Restaurants=[restaurant.serialize for restaurant in restaurants])
 
 if __name__ == '__main__':
     app.debug = True
