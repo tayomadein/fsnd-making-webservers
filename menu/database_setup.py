@@ -1,5 +1,5 @@
 """
-Setup Database for Menu
+Setup Database for Restaurants
 """
 
 #!/usr/bin/env python3
