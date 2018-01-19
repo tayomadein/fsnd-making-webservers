@@ -1,4 +1,4 @@
-# FSND Project: Logs Analysis
+# FSND Project: Restaurants and Menus
 #### by Omotayo Madein
 
 ## Description
