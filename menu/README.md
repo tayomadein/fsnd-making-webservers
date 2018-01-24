@@ -3,7 +3,7 @@
 
 ## Description
 
-This is a project for [Udacity Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004). The Restaurant Menu project focuses on testing and improving my skills in Creating Webservers, Performing CRUD Operations, Routing, Creating API endpoints and rendering the output via HTML templates using the Flask Framework while applying Iterative Development principles. 
+This is a project for [Udacity Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004). The Restaurant Menu project focuses on testing and improving my skills in Creating Webservers, Performing CRUD Operations, Routing, Creating API endpoints and rendering the output via HTML templates using the Flask Framework and SQLAlchemy while applying Iterative Development principles. 
 
 ## Project contents
 
