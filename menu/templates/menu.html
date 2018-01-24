@@ -2,6 +2,8 @@
     <body>
         <h1>{{restaurant.name}}</h1>
 
+        <a href='{{url_for('showRestaurants')}}'>Show All Restaurants</a>
+        </br>
         <a href='{{url_for('newMenuItem', restaurant_id = restaurant.id)}}'>Create New Menu Item</a>
         </br>
         </br>
@@ -17,23 +19,29 @@
             {% endif %}
         {% endwith %}
 
+        {% if items %}
+            {% for i in items %}
+                {{i.name}}
+                </br>
 
-        {% for i in items %}
+                {{i.description}}
+                </br>
 
-        {{i.name}}
-        </br>
+                {{i.price}}
+                </br>
 
-        {{i.description}}
-        </br>
+                {{i.course}}
+                </br>
 
-        {{i.price}}
-        </br>
+                <a href='{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}'>Edit</a>
+                </br>
+                <a href='{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}'>Delete</a>
+                </br>
+                </br>
+            {% endfor %}
+        {% else %}
+            <h3>No menu items yet. Be the first to create one</h3>
+        {% endif %}
 
-        <a href='{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}'>Edit</a>
-        </br>
-        <a href='{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}'>Delete</a>
-        </br>
-        </br>
-        {% endfor %}
     </body>
 </html>
