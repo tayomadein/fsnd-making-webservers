@@ -1,32 +1,35 @@
 <html>
-    <body>
-        <h1>Tay's Big Restaurant List</h1>
 
-        <a href='{{url_for('newRestaurant')}}'>Create New Restaurant</a>
+<head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div class='pane'>
+        <h1 class="header">Tay's Big Restaurant List</h1>
+
+        <a class="btn btn-top btn-right" href="{{url_for('newRestaurant')}}">Create New Restaurant</a>
         </br>
         </br>
 
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
+        {% with messages = get_flashed_messages() %} {% if messages %}
 
-            <ul>
-                {% for message in messages %}
-                    <li><strong> {{message}} </strong></li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        {% endwith %}
+        <ul class="flash">
+            {% for message in messages %}
+            <li>
+                <strong> {{message}} </strong>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %} {% for restaurant in restaurants %}
 
-
-        {% for restaurant in restaurants %}
-
-        <a href='{{url_for('showMenu', restaurant_id = restaurant.id)}}'>{{restaurant.name}}</a>
-        </br>
-        <a href='{{url_for('editRestaurant', restaurant_id = restaurant.id)}}'>Edit</a>
-        </br>
-        <a href='{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}'>Delete</a>
-        </br>
-        </br>
+        <h2><a class="" href="{{url_for('showMenu', restaurant_id = restaurant.id)}}">{{restaurant.name}}</a></h2>
+        <div class="btn-container">
+            <a class="btn" href="{{url_for('editRestaurant', restaurant_id = restaurant.id)}}">Edit</a>
+            <a class="btn" href="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}">Delete</a>
+        </div>
         {% endfor %}
-    </body>
+    </div>
+</body>
+
 </html>
